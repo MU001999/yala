@@ -1,11 +1,19 @@
 #include "YALC.hpp"
 
 
+static ::std::tuple<::std::string, ::std::string> _parse_params(int argc, const char *argv[])
+{
+	return ::std::make_tuple("", "");
+}
+
+
 int main(int argc, const char *argv[])
 {
-	const ::std::string out_file("out.cpp");
-	Lex lex(out_file);
+	auto [ifile, ofile] = _parse_params(argc, argv);
+
+	Lex lex(ifile);
 	lex.run();
+	lex.output(ofile == "" ? "tokenizer.hpp" : ofile);
 
 	return 0;
 }
