@@ -262,3 +262,6 @@ __pycache__/
 
 *.o
 .vscode/
+*.sln
+*.vcxproj
+*.filters
