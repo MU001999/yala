@@ -13,7 +13,7 @@ int main(int argc, const char *argv[])
 
 	Lex lex(ifile);
 	lex.run();
-	lex.output(ofile == "" ? "tokenizer.hpp" : ofile);
+	lex.output(ofile == "" ? "out.cpp" : ofile);
 
 	return 0;
 }

@@ -1,7 +1,19 @@
 #include "YALC.hpp"
 
 
-Lex::Lex(const ::std::string& _out_file)
+Lex::Lex(const ::std::string _input_file)
 {
-	freopen(_out_file.c_str(), "w+", stdout);
+    ::std::ifstream fin(_input_file);
 };
+
+
+void Lex::run()
+{
+
+}
+
+
+void Lex::output(const ::std::string _output_file)
+{
+    ::std::ofstream fout(_output_file);
+}
