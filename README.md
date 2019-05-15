@@ -3,7 +3,7 @@
 
 ##### example
 ```
-// example1.ylac
+// example1.yalc
 
 INTEGER    [0-9]+
 FLOAT      [0-9]*\.[0-9]+
