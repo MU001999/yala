@@ -1,9 +1,9 @@
 #include <tuple>
 #include "lex.hpp"
 
-static ::std::tuple<::std::string, ::std::string> _parse_params(int argc, const char *argv[])
+static std::tuple<std::string, std::string> _parse_params(int argc, const char *argv[])
 {
-	return ::std::make_tuple("", "");
+	return std::make_tuple("", "");
 }
 
 
