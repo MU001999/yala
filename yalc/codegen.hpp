@@ -1,0 +1,3 @@
+#ifndef YALC_CODEGEN_HPP
+#define YALC_CODEGEN_HPP
+#endif // YALC_CODEGEN_HPP
