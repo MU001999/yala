@@ -1,13 +1,10 @@
-# YALC, Yet Another Lexical Compiler
+# yala
+
+yet another lexical analyzar
 
 
 ##### example
 ```
-// example1.yalc
-
-INTEGER    [0-9]+
-FLOAT      [0-9]*\.[0-9]+
-IDENTIFIER [a-zA-Z_]+[a-zA-Z0-9_]*
-SPACE      [\t ]+
+// example1.yala
 
 ```
