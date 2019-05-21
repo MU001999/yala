@@ -3,16 +3,17 @@
 
 #include <string>
 
+namespace yala
+{
 class Lex
 {
 public:
 
-	Lex(const std::string &);
-	~Lex() {};
+    Lex(const std::string& ifile);
+    ~Lex() = default;
 
-	void run();
-
-	void output(const std::string &);
+    void output(const std::string&);
 };
+}
 
 #endif // YALC_LEX_HPP

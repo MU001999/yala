@@ -1,18 +1,20 @@
 #include <tuple>
 #include "lex.hpp"
 
-static std::tuple<std::string, std::string> _parse_params(int argc, const char *argv[])
+using namespace std;
+using namespace yala;
+
+static tuple<string, string> _parse_params(int argc, const char *argv[])
 {
-	return std::make_tuple("", "");
+	return make_tuple("", "");
 }
 
 
-int main(int argc, const char *argv[])
+int main(int argc, char *argv[])
 {
 	auto [ifile, ofile] = _parse_params(argc, argv);
 
 	Lex lex(ifile);
-	lex.run();
 	lex.output(ofile == "" ? "out.cpp" : ofile);
 
 	return 0;

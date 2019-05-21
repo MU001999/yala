@@ -1,19 +1,16 @@
 #include <fstream>
 #include "lex.hpp"
 
-Lex::Lex(const std::string &input_file)
+using namespace std;
+using namespace yala;
+
+Lex::Lex(const string &input_file)
 {
     std::ifstream fin(input_file);
 };
 
 
-void Lex::run()
-{
-
-}
-
-
-void Lex::output(const std::string &output_file)
+void Lex::output(const string &output_file)
 {
     std::ofstream fout(output_file);
 }
