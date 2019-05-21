@@ -3,9 +3,11 @@
 
 #include "lex.hpp"
 #include "parse.hpp"
+#include "codegen.hpp"
 
 using namespace std;
 using namespace yala;
+using namespace codegen;
 
 Lex::Lex(const string &ifile)
 {
@@ -17,6 +19,9 @@ Lex::Lex(const string &ifile)
 void Lex::output(const string &ofile)
 {
     ofstream fout(ofile);
-    // parse source and generate code
+
+    auto code = gen_code(source_);
+    fout.write(code.c_str(), code.size() + 1);
+
     fout.close();
 }
