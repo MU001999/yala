@@ -1,4 +1,5 @@
 #include <tuple>
+
 #include "lex.hpp"
 
 using namespace std;
@@ -6,16 +7,14 @@ using namespace yala;
 
 static tuple<string, string> _parse_params(int argc, const char *argv[])
 {
-	return make_tuple("", "");
+    return make_tuple("", "");
 }
-
 
 int main(int argc, char *argv[])
 {
-	auto [ifile, ofile] = _parse_params(argc, argv);
+    auto [ifile, ofile] = _parse_params(argc, argv);
 
-	Lex lex(ifile);
-	lex.output(ofile == "" ? "out.cpp" : ofile);
+    Lex(ifile).output(ofile == "" ? "out.cpp" : ofile);
 
-	return 0;
+    return 0;
 }

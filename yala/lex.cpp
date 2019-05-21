@@ -1,16 +1,22 @@
 #include <fstream>
+#include <streambuf>
+
 #include "lex.hpp"
+#include "parse.hpp"
 
 using namespace std;
 using namespace yala;
 
-Lex::Lex(const string &input_file)
+Lex::Lex(const string &ifile)
 {
-    std::ifstream fin(input_file);
-};
+    ifstream fin(ifile);
+    source_ = string(istreambuf_iterator<char>(fin), istreambuf_iterator<char>());
+    fin.close();
+}
 
-
-void Lex::output(const string &output_file)
+void Lex::output(const string &ofile)
 {
-    std::ofstream fout(output_file);
+    ofstream fout(ofile);
+    // parse source and generate code
+    fout.close();
 }
