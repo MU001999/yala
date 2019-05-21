@@ -13,7 +13,7 @@ yet another lexical analyzar
 
 enum TOKEN
 {
-    TEND,        // #
+    TEND = 1,        // #
 
     TAT,         // @
     TATAT,       // @@
@@ -172,10 +172,13 @@ not             { PUSH(TNOT); }
 
 int main(int argc, char *argv[])
 {
+    while (TOKEN token_id = yylex());
+
     for (auto &token : tokens)
     {
         std::cout << token.token_id << " " << token.value << std::endl;
     }
+
     return 0;
 }
 
