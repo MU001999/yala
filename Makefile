@@ -1,17 +1,17 @@
-DIR_INC = ./yalc
-DIR_SRC = ./yalc
+DIR_INC = ./yala
+DIR_SRC = ./yala
 DIR_OBJ = ./obj
 DIR_BIN = ./bin
 
 SRC = $(wildcard ${DIR_SRC}/*.cpp)
 OBJ = $(patsubst %.cpp, ${DIR_OBJ}/%.o, $(notdir ${SRC}))
 
-TARGET = yalc
+TARGET = yala
 
 BIN_TARGET = $(DIR_BIN)/$(TARGET)
 
 CC = g++
-CFLAGS = -g -Wall -std=c++11 -I$(DIR_INC)
+CFLAGS = -g -Wall -std=c++17 -I$(DIR_INC)
 
 CPPFLAGS = -std=c++11
 
