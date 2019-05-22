@@ -71,13 +71,15 @@ string gen_code(const string &source)
 {
     string code = prefix, appendix;
 
-    auto pos = source.find("%{");
+    size_t pos = source.find("%{"), end_pos = source.npos;
     if (pos != source.npos)
     {
-        auto end_pos = source.find("%}");
+        end_pos = source.find("%}");
         if (end_pos == source.npos) ERRPROC;
         code += source.substr(pos + 2, end_pos - pos - 2) + "\n\n";
     }
+    
+    end_pos = end_pos == source.npos ? 0 : end_pos + 2;
 
     pos = source.find("%%");
     if (pos == source.npos) ERRPROC;
@@ -87,11 +89,11 @@ string gen_code(const string &source)
     auto second_pos = source.find("%%", pos + 2);
     if (second_pos == source.npos) // without second %%
     {
-        actions = parse_action(source.substr(pos + 2));
+        actions = parse_action(source.substr(end_pos), pos);
     }
     else // with second %%
     {
-        actions = parse_action(source.substr(pos + 2, second_pos - pos - 2));
+        actions = parse_action(source.substr(end_pos, second_pos - end_pos), pos);
         code += source.substr(second_pos + 2) + "\n\n";
     }
     
@@ -99,4 +101,4 @@ string gen_code(const string &source)
 
     return code;
 }
-}
+} // namespace yala::codegen

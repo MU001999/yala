@@ -9,8 +9,8 @@ namespace yala
 namespace parse
 {
 std::unordered_map<std::string, std::string>
-parse_action(const std::string &source);
-}
-}
+parse_action(const std::string &source, size_t first_pos);
+} // namespace parse
+} // namespace yala
 
 #endif // YALA_PARSE_HPP

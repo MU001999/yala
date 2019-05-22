@@ -16,6 +16,6 @@ class Lex
   private:
     std::string source_;
 };
-}
+} // namespace yala
 
 #endif // YALA_LEX_HPP

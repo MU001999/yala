@@ -8,7 +8,7 @@ namespace yala
 namespace codegen
 {
 std::string gen_code(const std::string &source);
-}
-}
+} // namespace codegen
+} // namespace yala
 
 #endif
