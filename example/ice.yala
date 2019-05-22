@@ -5,7 +5,7 @@
 
 enum TOKEN
 {
-    TEND = 1,        // #
+    TEND = 1,    // #
 
     TAT,         // @
     TATAT,       // @@
@@ -87,7 +87,7 @@ std::vector<Token> tokens;
 
 #define PUSH(args) tokens.emplace_back(args)
 
-}%
+%}
 
 ws          \s+
 digit       [0-9]
