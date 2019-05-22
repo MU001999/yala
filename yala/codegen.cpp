@@ -14,9 +14,9 @@ using namespace yala::parse;
 namespace
 {
 const string prefix = 
-R"yala(##include <tility>
-include <string>
+R"yala(#include <string>
 #include <vector>
+#include <utility>
 #include <iostream>
 #include <functional>
 
@@ -27,12 +27,12 @@ int yylex();
 
 string gen_yylex(unordered_map<string, string> &actions)
 {
-    string patterns = R"yala(static std::vector<std::pair<cre::Pattern, std::function<void()>>> patterns = 
+    string patterns = R"yala(static std::vector<std::pair<cre::Pattern, std::function<int()>>> patterns = 
     {
 )yala";
     for (auto &re_action : actions)
-        patterns += "        { "s + re_action.first + ", "s + "[&] " + re_action.second + " },\n";
-    patterns += "    }\n";
+        patterns += "        { cre::Pattern(\""s + re_action.first + "\"), "s + "[&]() -> int " + re_action.second + " },\n";
+    patterns += "    };\n";
 
     string code = R"yala(
 int yylex()
@@ -49,7 +49,7 @@ int yylex()
 
         for (auto &pattern_func : patterns)
         {
-            now = pattern_func.first.match(source);
+            now = pattern_func.first.match(input);
             if (now.size() > yytext.size())
             {
                 yytext = now;
@@ -60,8 +60,7 @@ int yylex()
         return func();
     }
     return 0;
-}
-)yala"s;
+})yala"s;
     return code;
 }
 } // namespace
