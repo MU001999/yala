@@ -86,7 +86,6 @@ struct Token
 std::vector<Token> tokens;
 
 #define PUSH(args) tokens.emplace_back(args)
-
 %}
 
 ws          \s+
@@ -161,7 +160,6 @@ not             { PUSH(TNOT); return 0; }
 .               { ; }
 
 %%
-
 int main(int argc, char *argv[])
 {
     while (int res = yylex());
