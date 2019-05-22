@@ -21,7 +21,7 @@ void Lex::output(const string &ofile)
     ofstream fout(ofile);
 
     auto code = gen_code(source_);
-    fout.write(code.c_str(), code.size() + 1);
+    fout.write(code.c_str(), code.size());
 
     fout.close();
 }
