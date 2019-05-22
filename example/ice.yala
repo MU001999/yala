@@ -85,7 +85,15 @@ struct Token
 
 std::vector<Token> tokens;
 
-#define PUSH(args) tokens.emplace_back(args)
+inline void push(TOKEN token)
+{
+    tokens.emplace_back(token);
+}
+
+inline void push(TOKEN token, std::string text)
+{
+    tokens.emplace_back(token, text);
+}
 %}
 
 ws          \s+
@@ -97,67 +105,67 @@ identifier  [a-zA-Z_][a-zA-Z0-9_]*
 
 %%
 
-{ws}            { ; }
-{string}        { PUSH(TSTRING, yytext); return 0; }
-{double}        { PUSH(TDOUBLE, yytext); return 0; }
-{integer}       { PUSH(TINTEGER, yytext); return 0; }
-{identifier}    { PUSH(TIDENTIFIER, yytext); return 0; }
+{ws}            { return 1; }
+{string}        { push(TSTRING, yytext); return 1; }
+{double}        { push(TDOUBLE, yytext); return 1; }
+{integer}       { push(TINTEGER, yytext); return 1; }
+{identifier}    { push(TIDENTIFIER, yytext); return 1; }
 
-using           { PUSH(TUSING); return 0; }
-if              { PUSH(TIF); return 0; }
-elif            { PUSH(TELIF); return 0; }
-else            { PUSH(TELSE); return 0; }
-while           { PUSH(TWHILE); return 0; }
-do              { PUSH(TDO); return 0; }
-for             { PUSH(TFOR); return 0; }
-to              { PUSH(TTO); return 0; }
-foreach         { PUSH(TFOREACH); return 0; }
-as              { PUSH(TAS); return 0; }
-break           { PUSH(TBREAK); return 0; }
-continue        { PUSH(TCONTINUE); return 0; }
-return          { PUSH(TRETURN); return 0; }
-match           { PUSH(TMATCH); return 0; }
-new             { PUSH(TNEW); return 0; }
-none            { PUSH(TNONE); return 0; }
-true            { PUSH(TTRUE); return 0; }
-false           { PUSH(TFALSE); return 0; }
-and             { PUSH(TAND); return 0; }
-or              { PUSH(TOR); return 0; }
-not             { PUSH(TNOT); return 0; }
+using           { push(TUSING); return 1; }
+if              { push(TIF); return 1; }
+elif            { push(TELIF); return 1; }
+else            { push(TELSE); return 1; }
+while           { push(TWHILE); return 1; }
+do              { push(TDO); return 1; }
+for             { push(TFOR); return 1; }
+to              { push(TTO); return 1; }
+foreach         { push(TFOREACH); return 1; }
+as              { push(TAS); return 1; }
+break           { push(TBREAK); return 1; }
+continue        { push(TCONTINUE); return 1; }
+return          { push(TRETURN); return 1; }
+match           { push(TMATCH); return 1; }
+new             { push(TNEW); return 1; }
+none            { push(TNONE); return 1; }
+true            { push(TTRUE); return 1; }
+false           { push(TFALSE); return 1; }
+and             { push(TAND); return 1; }
+or              { push(TOR); return 1; }
+not             { push(TNOT); return 1; }
 
-"#"             { PUSH(TEND); return 0; }
-"@"             { PUSH(TAT); return 0; }
-"@@"            { PUSH(TATAT); return 0; }
-":"             { PUSH(TASSIGN); return 0; }
-";"             { PUSH(TCOMMA); return 0; }
-"."             { PUSH(TDOT); return 0; }
-"("             { PUSH(TLPAREN); return 0; }
-")"             { PUSH(TRPAREN); return 0; }
-"["             { PUSH(TLBRACKET); return 0; }
-"]"             { PUSH(TRBRACKET); return 0; }
-"{"             { PUSH(TLBRACE); return 0; }
-"}"             { PUSH(TRBRACE); return 0; }
-"+"             { PUSH(TADD); return 0; }
-"-"             { PUSH(TSUB); return 0; }
-"*"             { PUSH(TMUL); return 0; }
-"/"             { PUSH(TDIV); return 0; }
-"%"             { PUSH(TMOD); return 0; }
-"&"             { PUSH(TBAND); return 0; }
-"|"             { PUSH(TBOR); return 0; }
-"^"             { PUSH(TBXOR); return 0; }
-"~"             { PUSH(TBNEG); return 0; }
-"<<"            { PUSH(TBLS); return 0; }
-">>"            { PUSH(TBRS); return 0; }
-"!"             { PUSH(TNOT); return 0; }
-"="             { PUSH(TCEQ); return 0; }
-"!="            { PUSH(TCNE); return 0; }
-"<"             { PUSH(TCLT); return 0; }
-"<="            { PUSH(TCLE); return 0; }
-">"             { PUSH(TCGT); return 0; }
-">="            { PUSH(TCGE); return 0; }
-"=>"            { PUSH(TRET); return 0; }
+"#"             { push(TEND); return 1; }
+"@"             { push(TAT); return 1; }
+"@@"            { push(TATAT); return 1; }
+":"             { push(TASSIGN); return 1; }
+";"             { push(TCOMMA); return 1; }
+"."             { push(TDOT); return 1; }
+"("             { push(TLPAREN); return 1; }
+")"             { push(TRPAREN); return 1; }
+"["             { push(TLBRACKET); return 1; }
+"]"             { push(TRBRACKET); return 1; }
+"{"             { push(TLBRACE); return 1; }
+"}"             { push(TRBRACE); return 1; }
+"+"             { push(TADD); return 1; }
+"-"             { push(TSUB); return 1; }
+"*"             { push(TMUL); return 1; }
+"/"             { push(TDIV); return 1; }
+"%"             { push(TMOD); return 1; }
+"&"             { push(TBAND); return 1; }
+"|"             { push(TBOR); return 1; }
+"^"             { push(TBXOR); return 1; }
+"~"             { push(TBNEG); return 1; }
+"<<"            { push(TBLS); return 1; }
+">>"            { push(TBRS); return 1; }
+"!"             { push(TNOT); return 1; }
+"="             { push(TCEQ); return 1; }
+"!="            { push(TCNE); return 1; }
+"<"             { push(TCLT); return 1; }
+"<="            { push(TCLE); return 1; }
+">"             { push(TCGT); return 1; }
+">="            { push(TCGE); return 1; }
+"=>"            { push(TRET); return 1; }
 
-.               { ; }
+.               { return 1; }
 
 %%
 int main(int argc, char *argv[])
