@@ -1,6 +1,7 @@
 #ifndef YALA_PARSE_HPP
 #define YALA_PARSE_HPP
 
+#include <string>
 #include <unordered_map>
 
 namespace yala
