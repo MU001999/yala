@@ -25,21 +25,21 @@ R"yala(#include <string>
 int yylex();
 )yala";
 
-string gen_yylex(unordered_map<string, string> &actions)
+string gen_yylex(std::vector<std::pair<std::string, std::string>> &actions)
 {
     string patterns = R"yala(static std::vector<std::pair<cre::Pattern, std::function<int()>>> patterns = 
     {
 )yala";
     for (auto &re_action : actions)
-        patterns += "        { cre::Pattern(\""s + re_action.first + "\"), "s + "[&]() -> int " + re_action.second + " },\n";
+        patterns += "        { cre::Pattern(R\"("s + re_action.first + ")\"), "s + "[&]() -> int " + re_action.second + " },\n";
     patterns += "    };\n";
 
     string code = R"yala(
 int yylex()
 {
-    )yala"s + patterns + R"yala(
     static std::string input, yytext, now;
     static std::size_t pos = 0;
+    )yala"s + patterns + R"yala(
     char c;
     while (std::cin >> c) input += c;
     while (pos < input.size())
@@ -84,16 +84,16 @@ string gen_code(const string &source)
     pos = source.find("%%");
     if (pos == source.npos) ERRPROC;
     
-    unordered_map<string, string> actions;
+    std::vector<std::pair<std::string, std::string>> actions;
 
     auto second_pos = source.find("%%", pos + 2);
     if (second_pos == source.npos) // without second %%
     {
-        actions = parse_action(source.substr(end_pos), pos);
+        actions = parse_action(source.substr(end_pos), pos - end_pos);
     }
     else // with second %%
     {
-        actions = parse_action(source.substr(end_pos, second_pos - end_pos), pos);
+        actions = parse_action(source.substr(end_pos, second_pos - end_pos), pos - end_pos);
         code += source.substr(second_pos + 2) + "\n\n";
     }
     
