@@ -3,17 +3,15 @@
 
 #include "parse.hpp"
 #include "codegen.hpp"
-#include "../cre/cre.hpp"
 
 #define ERRPROC abort()
 
 using namespace std;
-using namespace cre;
 using namespace yala::parse;
 
 namespace
 {
-const string prefix = 
+const string prefix =
 R"yala(#include <string>
 #include <vector>
 #include <utility>
@@ -27,7 +25,7 @@ int yylex();
 
 string gen_yylex(std::vector<std::pair<std::string, std::string>> &actions)
 {
-    string patterns = R"yala(static std::vector<std::pair<cre::Pattern, std::function<int()>>> patterns = 
+    string patterns = R"yala(static std::vector<std::pair<cre::Pattern, std::function<int()>>> patterns =
     {
 )yala";
     for (auto &re_action : actions)
@@ -78,12 +76,12 @@ string gen_code(const string &source)
         if (end_pos == source.npos) ERRPROC;
         code += source.substr(pos + 2, end_pos - pos - 2) + "\n\n";
     }
-    
+
     end_pos = end_pos == source.npos ? 0 : end_pos + 2;
 
     pos = source.find("%%");
     if (pos == source.npos) ERRPROC;
-    
+
     std::vector<std::pair<std::string, std::string>> actions;
 
     auto second_pos = source.find("%%", pos + 2);
@@ -96,7 +94,7 @@ string gen_code(const string &source)
         actions = parse_action(source.substr(end_pos, second_pos - end_pos), pos - end_pos);
         code += source.substr(second_pos + 2) + "\n\n";
     }
-    
+
     if (!actions.empty()) code += gen_yylex(actions);
 
     return code;
