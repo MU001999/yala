@@ -2,6 +2,8 @@
 
 #include <vector>
 #include <string>
+#include <optional>
+#include <functional>
 
 namespace yala
 {
@@ -9,7 +11,7 @@ namespace detail
 {
 struct NFANode
 {
-
+    std::optional<std::size_t> return_id;
 };
 
 struct NFAPair
@@ -19,7 +21,7 @@ struct NFAPair
 
 struct DFANode
 {
-
+    std::optional<std::size_t> return_id;
 };
 
 class PatternParser
