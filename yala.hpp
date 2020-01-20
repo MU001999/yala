@@ -26,7 +26,11 @@ struct DFANode
 
 class PatternParser
 {
+  public:
+    void add_token_type(const std::string &id,
+        const std::string &pattern);
 
+    void compile();
 };
 }
 
@@ -45,6 +49,8 @@ class Tokenizer
 
     void add_token_type(const std::string &id,
         const std::string &pattern);
+
+    void compile();
 
   private:
     std::vector<std::string> ids_;
