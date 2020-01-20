@@ -1,7 +1,9 @@
 #pragma once
 
+#include <bitset>
 #include <vector>
 #include <string>
+#include <memory>
 #include <optional>
 #include <functional>
 
@@ -11,6 +13,16 @@ namespace detail
 {
 struct NFANode
 {
+    enum EdgeType
+    {
+        EPSILON,
+        CCL,
+        EMPTY
+    };
+
+    EdgeType edge_type;
+    std::bitset<256> input_set;
+    std::shared_ptr<NFANode> next, next2;
     std::optional<std::size_t> return_id;
 };
 
